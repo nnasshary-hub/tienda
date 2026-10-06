@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.tienda.service.CategoriaService;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,13 +24,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ProductoController {
 
     private final ProductoService productoService;
+    private final CategoriaService categoriaService;
     private final MessageSource messageSource;
 
     @GetMapping("/listado")
     public String listado(Model model) {
         var productos = productoService.getProductos(false);
+        var categorias = categoriaService.getCategorias(true);
+
         model.addAttribute("productos", productos);
+        model.addAttribute("categorias", categorias);
         model.addAttribute("totalProductos", productos.size());
+
         return "producto/listado";
     }
 
