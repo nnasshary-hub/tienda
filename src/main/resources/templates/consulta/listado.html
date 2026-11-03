@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
+
     <head th:replace="~{general/fragmentos :: head}"></head>
 
     <body>
@@ -9,80 +10,189 @@
         <main class="container py-4">
             <h2>Consultas por precio</h2>
 
-            <div class="row g-3">
-                <div class="col-md-4">
+            <div class="row g-3 align-items-stretch">
+
+                <!-- Consulta derivada -->
+                <div class="col-md-6 col-xl-3">
                     <form method="post"
                           th:action="@{/consultas/consultaDerivada}"
-                          class="card card-body">
+                          class="card card-body h-100">
+
                         <h5>Consulta derivada</h5>
 
-                        <label>Precio inferior</label>
-                        <input type="number" name="precioInf"
+                        <label for="derivadaPrecioInf">
+                            Precio inferior
+                        </label>
+                        <input id="derivadaPrecioInf"
+                               type="number"
+                               name="precioInf"
                                th:value="${precioInf}"
-                               min="0" step="0.01"
-                               class="form-control mb-2" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-2"
+                               required/>
 
-                        <label>Precio superior</label>
-                        <input type="number" name="precioSup"
+                        <label for="derivadaPrecioSup">
+                            Precio superior
+                        </label>
+                        <input id="derivadaPrecioSup"
+                               type="number"
+                               name="precioSup"
                                th:value="${precioSup}"
-                               min="0" step="0.01"
-                               class="form-control mb-3" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-3"
+                               required/>
 
-                        <button class="btn btn-primary" type="submit">
+                        <button class="btn btn-primary mt-auto"
+                                type="submit">
                             Consultar
                         </button>
                     </form>
                 </div>
 
-                <div class="col-md-4">
+                <!-- Consulta JPQL -->
+                <div class="col-md-6 col-xl-3">
                     <form method="post"
                           th:action="@{/consultas/consultaJPQL}"
-                          class="card card-body">
+                          class="card card-body h-100">
+
                         <h5>Consulta JPQL</h5>
 
-                        <label>Precio inferior</label>
-                        <input type="number" name="precioInf"
+                        <label for="jpqlPrecioInf">
+                            Precio inferior
+                        </label>
+                        <input id="jpqlPrecioInf"
+                               type="number"
+                               name="precioInf"
                                th:value="${precioInf}"
-                               min="0" step="0.01"
-                               class="form-control mb-2" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-2"
+                               required/>
 
-                        <label>Precio superior</label>
-                        <input type="number" name="precioSup"
+                        <label for="jpqlPrecioSup">
+                            Precio superior
+                        </label>
+                        <input id="jpqlPrecioSup"
+                               type="number"
+                               name="precioSup"
                                th:value="${precioSup}"
-                               min="0" step="0.01"
-                               class="form-control mb-3" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-3"
+                               required/>
 
-                        <button class="btn btn-warning" type="submit">
+                        <button class="btn btn-warning mt-auto"
+                                type="submit">
                             Consultar
                         </button>
                     </form>
                 </div>
 
-                <div class="col-md-4">
+                <!-- Consulta SQL -->
+                <div class="col-md-6 col-xl-3">
                     <form method="post"
                           th:action="@{/consultas/consultaSQL}"
-                          class="card card-body">
+                          class="card card-body h-100">
+
                         <h5>Consulta SQL</h5>
 
-                        <label>Precio inferior</label>
-                        <input type="number" name="precioInf"
+                        <label for="sqlPrecioInf">
+                            Precio inferior
+                        </label>
+                        <input id="sqlPrecioInf"
+                               type="number"
+                               name="precioInf"
                                th:value="${precioInf}"
-                               min="0" step="0.01"
-                               class="form-control mb-2" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-2"
+                               required/>
 
-                        <label>Precio superior</label>
-                        <input type="number" name="precioSup"
+                        <label for="sqlPrecioSup">
+                            Precio superior
+                        </label>
+                        <input id="sqlPrecioSup"
+                               type="number"
+                               name="precioSup"
                                th:value="${precioSup}"
-                               min="0" step="0.01"
-                               class="form-control mb-3" required/>
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-3"
+                               required/>
 
-                        <button class="btn btn-success" type="submit">
+                        <button class="btn btn-success mt-auto"
+                                type="submit">
+                            Consultar
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Práctica #2: consulta por categoría y precio -->
+                <div class="col-md-6 col-xl-3">
+                    <form method="post"
+                          th:action="@{/consultas/consultaAmpliada}"
+                          class="card card-body h-100">
+
+                        <h5>Consulta ampliada</h5>
+
+                        <label for="ampliadaCategoria">
+                            Categoría
+                        </label>
+                        <select id="ampliadaCategoria"
+                                name="idCategoria"
+                                class="form-select mb-2"
+                                required>
+                            <option value="">
+                                Seleccione una categoría
+                            </option>
+                            <option th:each="c : ${categorias}"
+                                    th:value="${c.idCategoria}"
+                                    th:text="${c.descripcion}"
+                                    th:selected="${c.idCategoria == idCategoria}">
+                            </option>
+                        </select>
+
+                        <label for="ampliadaPrecioInf">
+                            Precio inferior
+                        </label>
+                        <input id="ampliadaPrecioInf"
+                               type="number"
+                               name="precioInf"
+                               th:value="${precioInf}"
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-2"
+                               required/>
+
+                        <label for="ampliadaPrecioSup">
+                            Precio superior
+                        </label>
+                        <input id="ampliadaPrecioSup"
+                               type="number"
+                               name="precioSup"
+                               th:value="${precioSup}"
+                               min="0"
+                               step="0.01"
+                               class="form-control mb-3"
+                               required/>
+
+                        <button class="btn btn-danger mt-auto"
+                                type="submit">
                             Consultar
                         </button>
                     </form>
                 </div>
             </div>
         </main>
+
+        <div class="container"
+             th:if="${productos != null and productos.empty}">
+            <p class="alert alert-info">
+                No se encontraron productos con los filtros indicados.
+            </p>
+        </div>
 
         <section th:replace="~{consulta/fragmentos :: tarjetas}"></section>
 
