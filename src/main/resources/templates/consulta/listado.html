@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{general/fragmentos :: head}"></head>
+
+    <body>
+        <header th:replace="~{general/fragmentos :: header}"></header>
+
+        <main class="container py-4">
+            <h2>Consultas por precio</h2>
+
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <form method="post"
+                          th:action="@{/consultas/consultaDerivada}"
+                          class="card card-body">
+                        <h5>Consulta derivada</h5>
+
+                        <label>Precio inferior</label>
+                        <input type="number" name="precioInf"
+                               th:value="${precioInf}"
+                               min="0" step="0.01"
+                               class="form-control mb-2" required/>
+
+                        <label>Precio superior</label>
+                        <input type="number" name="precioSup"
+                               th:value="${precioSup}"
+                               min="0" step="0.01"
+                               class="form-control mb-3" required/>
+
+                        <button class="btn btn-primary" type="submit">
+                            Consultar
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-md-4">
+                    <form method="post"
+                          th:action="@{/consultas/consultaJPQL}"
+                          class="card card-body">
+                        <h5>Consulta JPQL</h5>
+
+                        <label>Precio inferior</label>
+                        <input type="number" name="precioInf"
+                               th:value="${precioInf}"
+                               min="0" step="0.01"
+                               class="form-control mb-2" required/>
+
+                        <label>Precio superior</label>
+                        <input type="number" name="precioSup"
+                               th:value="${precioSup}"
+                               min="0" step="0.01"
+                               class="form-control mb-3" required/>
+
+                        <button class="btn btn-warning" type="submit">
+                            Consultar
+                        </button>
+                    </form>
+                </div>
+
+                <div class="col-md-4">
+                    <form method="post"
+                          th:action="@{/consultas/consultaSQL}"
+                          class="card card-body">
+                        <h5>Consulta SQL</h5>
+
+                        <label>Precio inferior</label>
+                        <input type="number" name="precioInf"
+                               th:value="${precioInf}"
+                               min="0" step="0.01"
+                               class="form-control mb-2" required/>
+
+                        <label>Precio superior</label>
+                        <input type="number" name="precioSup"
+                               th:value="${precioSup}"
+                               min="0" step="0.01"
+                               class="form-control mb-3" required/>
+
+                        <button class="btn btn-success" type="submit">
+                            Consultar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <section th:replace="~{consulta/fragmentos :: tarjetas}"></section>
+
+        <footer th:replace="~{general/fragmentos :: footer}"></footer>
+    </body>
+</html>
